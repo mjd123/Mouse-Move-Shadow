@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥LIT!</h1>
+  </div>
+
+  <style>
+  html {
+    color:black;
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:black;
+  }
+
+  h1 {
+    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    font-size: 100px;
+  }
+  </style>
+
+
+
+<script>
+const body = document.querySelector(".hero");
+const word = document.querySelector(".hero h1");
+
+function moveHandler(e) {
+  let y = e.offsetY;
+  let x = e.offsetX;
+
+  if (e.target == word) { // if mouse over h1
+    x = e.target.offsetLeft + x;
+    y = e.target.offsetTop + y;
+  }
+
+  //shadow movement
+
+  const shadow = 50;
+  const calcX = (x/word.offsetWidth) * shadow;
+  const calcY = (y/word.offsetHeight) * shadow;
+
+  word.style.textShadow = `
+  ${(calcX) - (shadow/5)}px ${(calcY) - (shadow/5)}px 0 yellow,
+  ${(-1 * calcX) - (shadow/2)}px ${(-1 *calcY) - (shadow/2)}px 0 red
+  `;
+};
+
+document.addEventListener("mousemove", moveHandler);
+</script>
+</body>
+</html>
